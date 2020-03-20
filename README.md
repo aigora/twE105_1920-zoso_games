@@ -1,5 +1,4 @@
-# Título del trabajo
-* Fiesta de los muertos
+# Fiesta de los muertos
 * Desarrollar un juego digital inspirado en un juego de mesa el cual es de tipo abstracto.
 Juego para dos jugadores, donde gana el jugador que consiga cruzar con sus ocho piezas la linea final de su dirección.
 
