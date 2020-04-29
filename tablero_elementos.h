@@ -41,6 +41,9 @@ void imprimir (char dTab[][DIMTAB_Y]);
 int toRelX ( int );
 int toRelY ( int );
 
+void getFicha(char [][DCOL], char[]);
+coord getCoordIni(int, int);
+
 //codigo de prueba 
 //void imprimirBool (_Bool [][DIMTAB_REL] ); 
 
