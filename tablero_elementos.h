@@ -13,6 +13,11 @@
 
 #define DIRTAB "prTabV2.txt" //Dirección del archivo del tablero.(*INNECESARIO AQUÍ YA QUE SOLO LO LLAMAMOS UNA VEZ*)
 
+typedef struct {
+	
+	char coordAbsolutas[DIMTAB_X][DIMTAB_Y];
+	_Bool coordRelativas[DIMTAB_REL][DIMTAB_REL];
+}tab;
 
 typedef struct {
 	
@@ -28,3 +33,9 @@ typedef struct {
 	coord cActual;			//Cordenadas absolutas(Dibujo).
 	coord relativas;		//Coordenadas relativas al tablero de juego.
 }pieza;
+
+void iniTablero(tab *pTablero, char[]);
+
+//codigo de prueba 
+//void imprimirBool (_Bool [][DIMTAB_REL] ); 
+
