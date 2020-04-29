@@ -36,6 +36,11 @@ typedef struct {
 
 void iniTablero(tab *pTablero, char[]);
 
+void imprimir (char dTab[][DIMTAB_Y]);
+
+int toRelX ( int );
+int toRelY ( int );
+
 //codigo de prueba 
 //void imprimirBool (_Bool [][DIMTAB_REL] ); 
 
