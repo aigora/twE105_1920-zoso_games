@@ -109,7 +109,7 @@ void setDirecciones(coord temp, coord destino, int *dx, int *dy){
 		
 }
 
-//Determina si una pieza a cruzado la meta que le corresponde:
+//Determina si una pieza ha cruzado la meta que le corresponde:
 
 _Bool checkPiezaMeta(pieza *pJT, pieza *J1, pieza *J2, coord *casilla){
 	
