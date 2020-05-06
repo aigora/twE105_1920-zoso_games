@@ -35,9 +35,9 @@ typedef struct {
 }pieza;
 
 void iniTablero(tab *pTablero, char[]);
-
+void setTablero (tab *pTab, char ficha[][DCOL], int coordX, int coordY);
 void imprimir (char dTab[][DIMTAB_Y]);
-
+void borrarTablero (char [][DIMTAB_Y], int, int);
 int toRelX ( int );
 int toRelY ( int );
 
