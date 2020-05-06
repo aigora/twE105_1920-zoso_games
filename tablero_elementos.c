@@ -80,3 +80,47 @@ void borrarTablero (char dTab[][DIMTAB_Y], int coordX, int coordY){
 //		printf("\n");
 //	}		
 //}
+
+
+void getFicha(char dFicha[][DCOL], char dir[]){
+	
+	int i=0,j=0;
+	char aux;
+	FILE *pTFile;
+	pTFile = fopen(dir,"r");
+	
+	while(fscanf(pTFile,"%c",&aux) != EOF){
+		
+		dFicha[i][j] = aux;
+		
+		if (aux == '\n'){
+			j=-1;
+			i++;
+		}
+
+		j++;
+	}
+	
+	fclose(pTFile);			
+}
+
+coord getCoordIni(int jug, int i){
+	
+	coord paso[DIM_PIEZASJ];
+	coord iniJ1[DIM_PIEZASJ]={	{POS1J1_X, POS1J1_Y}, {POS2J1_X, POS2J1_Y}, {POS3J1_X, POS3J1_Y}, {POS4J1_X, POS4J1_Y}, {POS5J1_X, POS5J1_Y}, {POS6J1_X, POS6J1_Y}, {POS7J1_X, POS7J1_Y}, {POS8J1_X, POS8J1_Y}	};
+	coord iniJ2[DIM_PIEZASJ]={	{POS1J2_X, POS1J2_Y}, {POS2J2_X, POS2J2_Y}, {POS3J2_X, POS3J2_Y}, {POS4J2_X, POS4J2_Y}, {POS5J2_X, POS5J2_Y}, {POS6J2_X, POS6J2_Y}, {POS7J2_X, POS7J2_Y}, {POS8J2_X, POS8J2_Y}	};
+	
+	int k;
+	
+	for (k=0;k < DIM_PIEZASJ;k++){
+		
+		if (jug == 1)
+			paso[k] = iniJ1[k];
+			
+		if (jug ==2)
+			paso[k] = iniJ2[k];  		
+	}
+
+	return paso[i];
+
+}
