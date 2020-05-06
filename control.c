@@ -9,6 +9,50 @@
 
 //Función que calcula la cantidad de movimiento:
 
+_Bool checkCoordC(pieza *pJT, pieza *pJNT, pieza *pJ1, pieza *pJ2, coord temp, coord *nJ){
+	
+	_Bool continuar = 0;
+	int nada = 0; 
+	int i;
+	
+		
+	for (i= 0; i<8; i++){
+			
+		if (( pJT[i].cActual.x == temp.x)&&( pJT[i].cActual.y == temp.y)){
+			continuar = 0;
+			printf ("En esa casilla ya hay una pieza.\n");
+			break;
+		}else if (( pJNT[i].cActual.x == temp.x)&&( pJNT[i].cActual.y == temp.y)){
+			continuar = 0;
+			printf ("En esa casilla ya hay una pieza.\n");
+			break;
+		}else 
+			continuar = 1;
+				
+	}
+	
+	for (i=0; i<24; i++){
+		
+		if (( nJ[i].x == temp.x)&&( nJ[i].y == temp.y)){
+			continuar = 0;
+			printf("No puedes mover una pieza a esa casilla capullo.\n");
+		}	
+	}
+	
+	
+	if ((pJT == pJ1) && (temp.y == 131)){
+		continuar = 0;
+		printf("El Jugador 1 no puede salir del tablero en esa direccion\n");
+	}
+	
+	if (( pJT == pJ2) && (temp.x == 1)){
+		continuar = 0;
+		printf("El jugador 2 no puede salir del tablero en esa direccion\n");
+	}
+	
+	return continuar;	
+}
+
 int nDistMov( pieza *pJT, pieza *pJ1, pieza *pJ2, coord pSelec){
 	
 	int xFijo = pSelec.x;
@@ -124,3 +168,24 @@ _Bool checkPiezaMeta(pieza *pJT, pieza *J1, pieza *J2, coord *casilla){
 		
 	return meta;
 }
+
+_Bool finTurno(){
+	
+	char aux;
+	_Bool retorno;
+	
+	do {
+		
+		printf ("Continuar la partida? (S/N)\n");
+		fflush(stdin);
+		scanf("%c",&aux);
+		if ( aux == 'S') retorno = 1;
+		else if (aux == 'N') retorno = 0;
+		else printf("Opcion no valida\n");
+		
+	}while ( aux != 'S' && aux != 'N' );
+	
+	return retorno;
+
+}
+
