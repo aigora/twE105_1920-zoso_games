@@ -9,6 +9,64 @@
 
 //Función que calcula la cantidad de movimiento:
 
+coord getCoordInput( char *mInfoJ, char *mInfoA){
+	
+	int col, fil;
+	const int mcol = 'A', mfil = 1;
+	coord cInput = {0,0};
+	
+	do {
+		
+		printf ("\n%s seleccione las coordenadas de la %s \n", mInfoJ, mInfoA);
+		fflush (stdin);
+		scanf ("%c%d", &col, &fil);
+	}while ( (col < 'A') || (col>'J') || (fil < 1) || (fil > 10) );
+
+	//Establecemos las coordenadas a relativas(origen A1 (5,55):
+	col -=mcol;
+	fil -=mfil;	
+	cInput.x = ZFIL - DFIL*fil;
+	cInput.y = ZCOL + DCOL*col;
+	
+	return cInput;	
+}
+
+_Bool checkCoordP(pieza *pJT, pieza *pJNT, coord seleccionada, int *nPos){
+	
+	_Bool continuar;
+	
+	
+	int i, nada = 0;
+	
+	for ( i=0; i<8; i++){
+		
+		if(( pJT[i].cActual.x == seleccionada.x)&&(pJT[i].cActual.y == seleccionada.y)){
+			*nPos = i;
+			continuar = 1;
+		}
+		else 
+			nada++;
+	}
+	
+	for ( i=0; i<8; i++){
+		
+		if(( pJNT[i].cActual.x == seleccionada.x)&&(pJNT[i].cActual.y == seleccionada.y)){
+			continuar = 0;
+			printf ("Esa pieza le pertenece al otro jugador\n");
+		}
+		else 
+			nada++;
+	}
+	
+	if (nada == 16){
+		continuar = 0;
+		printf("No hay ficha en esa casilla\n");
+	}
+	
+	return continuar;
+}
+
+
 _Bool checkCoordC(pieza *pJT, pieza *pJNT, pieza *pJ1, pieza *pJ2, coord temp, coord *nJ){
 	
 	_Bool continuar = 0;
