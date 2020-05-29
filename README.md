@@ -11,4 +11,3 @@ Juego para dos jugadores, donde gana el jugador que consiga cruzar con sus ocho 
 # Objetivos del trabajo
 * Desarrollar un juego de tablero.
 * Creación y control de sistema del juego.
-* Uso de ficheros para guardar las partidas y estadisticas de estas.
