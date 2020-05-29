@@ -1,13 +1,12 @@
-//Cuerpo de control
+//Cabecera de Control.
 //
 //Distintas funciones para determinar acciones y reglas del juego.
 
 
-#include <stdio.h>
-#include <string.h>
-#include "control.h"
 
-//Función que calcula la cantidad de movimiento:
+#include <stdio.h>
+#include "control.h"
+		
 
 coord getCoordInput( char *mInfoJ, char *mInfoA){
 	
@@ -34,7 +33,6 @@ coord getCoordInput( char *mInfoJ, char *mInfoA){
 _Bool checkCoordP(pieza *pJT, pieza *pJNT, coord seleccionada, int *nPos){
 	
 	_Bool continuar;
-	
 	
 	int i, nada = 0;
 	
@@ -66,7 +64,6 @@ _Bool checkCoordP(pieza *pJT, pieza *pJNT, coord seleccionada, int *nPos){
 	return continuar;
 }
 
-
 _Bool checkCoordC(pieza *pJT, pieza *pJNT, pieza *pJ1, pieza *pJ2, coord temp, coord *nJ){
 	
 	_Bool continuar = 0;
@@ -93,7 +90,7 @@ _Bool checkCoordC(pieza *pJT, pieza *pJNT, pieza *pJ1, pieza *pJ2, coord temp, c
 		
 		if (( nJ[i].x == temp.x)&&( nJ[i].y == temp.y)){
 			continuar = 0;
-			printf("No puedes mover una pieza a esa casilla capullo.\n");
+			printf("No puedes mover una pieza a esa casilla.\n");
 		}	
 	}
 	
@@ -110,6 +107,8 @@ _Bool checkCoordC(pieza *pJT, pieza *pJNT, pieza *pJ1, pieza *pJ2, coord temp, c
 	
 	return continuar;	
 }
+
+//Función que calcula la cantidad de movimiento:
 
 int nDistMov( pieza *pJT, pieza *pJ1, pieza *pJ2, coord pSelec){
 	
@@ -143,7 +142,24 @@ int nDistMov( pieza *pJT, pieza *pJ1, pieza *pJ2, coord pSelec){
 	return nMov;
 }
 
-//Funcion que se encarga de comprobar si realmente nos podemos mover a una casilla con la cantidad de movimientos disponibles teniendo en cuenta otros elementos en el tablero:
+_Bool checknMov(coord cFicha, coord cDestino, int nMov){ //funcion que va a comprobrar si es posible moverse hasta el destino 
+	
+	int nMovRel, nMovCol, nMovFil; // nMovRel: variable aux para acotar las iteraciones; nMovX: distancia en columnas hasta el destino; nMovY: distancia hasta el destino en filas.
+	_Bool cont = 0;
+	
+	nMovCol = abs(cDestino.y - cFicha.y) / DCOL; 
+	nMovFil = abs(cDestino.x - cFicha.x) / DFIL;
+	nMovRel = nMov - nMovCol - nMovFil; 
+	
+	if (nMovRel < 0){  // Comprueba si esta demasiado lejos de primeras.
+	
+		printf("No dispone de la cantidad de movimiento suficiente para moverse a la casilla seleccionada.\n");
+	}
+	else cont =1;
+
+
+	return cont;
+}
 
 _Bool checkMovimiento( _Bool tabRel[][DIMTAB_REL], _Bool track [][DIMTAB_REL], int x, int y, coord destino, int nMov){
 	
@@ -154,7 +170,7 @@ _Bool checkMovimiento( _Bool tabRel[][DIMTAB_REL], _Bool track [][DIMTAB_REL], i
 	// Comprobamos si esta en el tablero, si queda movimiento, si hay obstáculos en el tablero o si ha estado en esa casilla antes.
 	if ( x < 0 || x > 9 || y < 0 || y > 9 || nMov < 0 || tabRel[x][y] || track[x][y] ) 
 		return 0;
-		
+
 	setDirecciones( actual, destino, &dx, &dy);		// Establecemos la dirección de los desplazamientos.
 	track [x][y] = 1;	//Marcamos la casilla en la que estamos para el seguimiento.	
 
@@ -182,8 +198,6 @@ _Bool checkMovimiento( _Bool tabRel[][DIMTAB_REL], _Bool track [][DIMTAB_REL], i
 	}
 }
 
-//Inicializa/Resetea el track:
-
 void iniTrack( _Bool v[][DIMTAB_REL]){
 	
 	int i,j;
@@ -194,8 +208,6 @@ void iniTrack( _Bool v[][DIMTAB_REL]){
 			v[i][j] = 0;				
 	}
 }
-
-//Determina la direccion de movimiento para chekMovimiento:
 
 void setDirecciones(coord temp, coord destino, int *dx, int *dy){
 	
@@ -211,8 +223,6 @@ void setDirecciones(coord temp, coord destino, int *dx, int *dy){
 		
 }
 
-//Determina si una pieza ha cruzado la meta que le corresponde:
-
 _Bool checkPiezaMeta(pieza *pJT, pieza *J1, pieza *J2, coord *casilla){
 	
 	_Bool meta; //Bool de retorno;
@@ -225,6 +235,7 @@ _Bool checkPiezaMeta(pieza *pJT, pieza *J1, pieza *J2, coord *casilla){
 		meta = 0;
 		
 	return meta;
+
 }
 
 _Bool finTurno(){
@@ -246,4 +257,3 @@ _Bool finTurno(){
 	return retorno;
 
 }
-
