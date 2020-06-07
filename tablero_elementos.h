@@ -57,7 +57,7 @@ coord getCoordIni(int jug, int i);
 void saveGame(pieza *pJT, pieza *pJNT, pieza *pJ1, pieza *pJ2, int nPiezaJ1, int nPiezaJ2);
 int leerPartidasGuardadas(FILE *pf, partida *listaPartidas);
 void imprimirLista( partida *listaPartidas, int n, int *limite, int tipo);
-int seleccionarPartidaGuardada(int limite, int *n, _Bool *sobrescribir );
+int seleccionarPartidaGuardada(int limite, int n, _Bool *sobrescribir );
 void loadGame (tab *pTablero, pieza *J1, pieza *J2, _Bool **load, int **turno, int **nJ1, int **nJ2, _Bool **cJuego );
 //codigo de prueba 
 //void imprimirBool (_Bool [][DIMTAB_REL] ); 

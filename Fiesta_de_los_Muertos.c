@@ -26,8 +26,8 @@ int main(){
 	int *pnPiezasJ; // Apunta al numero de piezas del jugador que este en su turno.
 	char mInfoJ1[] = "Jugador 1";
 	char mInfoJ2[] = "Jugador 2";
-	char mSelectP[] = "pieza que quiere jugar.\n";
-	char mSelectC[] = "casilla a la que quiere mover la pieza.\n";
+	char mSelectP[] = "pieza que quiere jugar";
+	char mSelectC[] = "casilla a la que quiere mover la pieza";
 	coord temp, tempRel;	
 	char *mInfoJ, *mSelect, aux; //Punteros que apuntaran a las cadenas de jugadores y acciones respectivamente;
 	
@@ -57,7 +57,8 @@ int main(){
 	
 			}			
 		}else {
-		//Establecemos que el primer turno es del jugador 1.			
+		//Establecemos que el primer turno es del jugador 1.
+		
 			pJ = J1;
 			pNJ = J2;
 			mInfoJ = mInfoJ1;
@@ -161,13 +162,13 @@ int main(){
 	
 						do {
 		
-							printf ( "Desea guardar la partida?\n");
+							printf ( "Desea guardar la partida?(s/n)\n");
 							fflush(stdin);
 							scanf("%c",&aux);
-							if ( aux == 'S') saveGame(pJ, pNJ, J1, J2, nPiezasJ1, nPiezasJ2);
-							else printf("Opcion no valida\n");
+							if ( aux == 's') saveGame(pJ, pNJ, J1, J2, nPiezasJ1, nPiezasJ2);
+							else if ( aux != 'n') printf("Opcion no valida\n");
 		
-						}while ( aux != 'S' && aux != 'N' );
+						}while ( aux != 's' && aux != 'n' );
 					}				
 				}	
 				

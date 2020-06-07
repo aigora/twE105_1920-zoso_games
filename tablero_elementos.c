@@ -173,24 +173,25 @@ void saveGame(pieza *pJT, pieza *pJNT, pieza* pJ1, pieza*pJ2, int nPiezaJ1, int 
 	do{
 	
 		imprimirLista( listaPartidas, n, &limite, 1); //imprimir lista
-		opcion = seleccionarPartidaGuardada( limite, &n, &sobrescribir ); //seleccionar hueco de guardado.
+		opcion = seleccionarPartidaGuardada( limite, n, &sobrescribir ); //seleccionar hueco de guardado.
 		
 	}while (!sobrescribir);
 	
 
-	if (opcion + 1 > n){
+	if (opcion > n){
 		
 		printf ( "Elige un nombre para guardar la partida (max 20 caracteres):\n");
 		fflush(stdin);
 		scanf( "%20[^\n]",nombre);
 		strcpy(listaPartidas[opcion-1].nombre, nombre);
+		n++;
 	}
 	
 	if ( pJT == pJ1) turno = 1;
 	else turno = 2;
  
-	listaPartidas[opcion-1].turno = turno;
-	listaPartidas[opcion -1].nPiezJ1 = nPiezaJ1;
+	listaPartidas[opcion - 1].turno = turno;
+	listaPartidas[opcion - 1].nPiezJ1 = nPiezaJ1;
 	listaPartidas[opcion - 1].nPiezJ2 = nPiezaJ2;
 				
 	for ( i = 0; i < DIM_PIEZASJ; i++){
@@ -220,6 +221,8 @@ void saveGame(pieza *pJT, pieza *pJNT, pieza* pJ1, pieza*pJ2, int nPiezaJ1, int 
 				}
 			}
 	}
+	
+	printf("Se ha gurdado la partida.\n");
 
 	fclose(pf);
 }
@@ -258,7 +261,7 @@ void imprimirLista( partida *listaPartidas, int n, int *limite, int tipo){
 	
 	int i;
 	
-	printf ( "Seleccione donde quiere guardar la partida:\n");
+	printf ( "Seleccione donde quiere guardar la partida (Maximo 5 partidas):\n");
 	
 	for ( i = 0; i < n; i++){
 		
@@ -276,16 +279,18 @@ void imprimirLista( partida *listaPartidas, int n, int *limite, int tipo){
 	}
 }
 
-int seleccionarPartidaGuardada(int limite, int *n, _Bool *sobrescribir ){
+int seleccionarPartidaGuardada(int limite, int n, _Bool *sobrescribir ){
 	
 	int opcion;
-	int ntemp = *n;
+	int ntemp = n;
 	char aux;
 	
 	do {
 			
 		fflush(stdin); 	
-		scanf( "%d", &opcion);		
+		scanf( "%d", &opcion);
+		
+		if ( opcion < 1 || opcion > limite) printf ("No hay una partida guardada en la opcion seleccionada.\n");		
 
 	}while ( opcion < 1 || opcion > limite);
 	
@@ -293,19 +298,22 @@ int seleccionarPartidaGuardada(int limite, int *n, _Bool *sobrescribir ){
 		
 		do{
 				
-			printf ("Hay una partida guardada en ese hueco. Desea sobrescribir la partida? (S/N)");
+			printf ("Hay una partida guardada en ese hueco. Desea sobrescribir la partida? (s/n)");
 			
 			fflush(stdin);
 			scanf( "%c", &aux);
-		}while ( aux != 'S' && aux != 'N');
 			
-		if ( aux == 'S') *sobrescribir = 1;
+			if ( aux != 's' && aux != 'n') printf ( "Opcion no valida.\n");
+			
+		}while ( aux != 's' && aux != 'n');
+			
+		if ( aux == 's') *sobrescribir = 1;
 		else *sobrescribir = 0;
-			
-	}else ntemp++;
+	}
+//	}else ntemp++;
 	
 	
-	*n = ntemp;
+//	*n = ntemp;
 		
 	return opcion;	
 }

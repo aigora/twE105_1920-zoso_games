@@ -16,9 +16,15 @@ coord getCoordInput( char *mInfoJ, char *mInfoA){
 	
 	do {
 		
-		printf ("\n%s seleccione las coordenadas de la %s \n", mInfoJ, mInfoA);
+		printf ("\n%s seleccione las coordenadas de la %s. Seleccione en primer lugar la columna (letra) y a continuacion la fila (numero). \n", mInfoJ, mInfoA);
 		fflush (stdin);
 		scanf ("%c%d", &col, &fil);
+		
+		if ((col >= 'a') && (col <= 'j')) col = toUp(col); 
+		else if ( (col < 'A') || ( col > 'J')) printf("Columna no valida. La columna debe estar entre a/A y j/J.\n");
+		
+		if  ((fil < 1) || (fil > 10) ) printf ("Fila no valida. La fila Debe estar entre 1 y 10.\n");	
+		
 	}while ( (col < 'A') || (col>'J') || (fil < 1) || (fil > 10) );
 
 	//Establecemos las coordenadas a relativas(origen A1 (5,55):
@@ -245,15 +251,26 @@ _Bool finTurno(){
 	
 	do {
 		
-		printf ("Continuar la partida? (S/N)\n");
+		printf ("Continuar la partida? (s/n)\n");
 		fflush(stdin);
 		scanf("%c",&aux);
-		if ( aux == 'S') retorno = 1;
-		else if (aux == 'N') retorno = 0;
+		if ( aux == 's') retorno = 1;
+		else if (aux == 'n') retorno = 0;
 		else printf("Opcion no valida\n");
 		
-	}while ( aux != 'S' && aux != 'N' );
+	}while ( aux != 's' && aux != 'n' );
 	
 	return retorno;
 
+}
+
+char toUp(char aux ){
+	
+	char mayus;
+	const int pasoMayus = 'A' - 'a';;
+	
+	mayus = aux + pasoMayus;
+	
+	return mayus; 	
+	
 }

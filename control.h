@@ -15,3 +15,4 @@ void iniTrack( _Bool [][DIMTAB_REL]);
 void setDirecciones(coord, coord, int*, int*);
 _Bool checkPiezaMeta(pieza*, pieza*, pieza*, coord*);
 _Bool finTurno();
+char toUp(char aux );
